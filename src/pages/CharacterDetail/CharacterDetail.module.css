@@ -1,0 +1,227 @@
+.detail {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Section */
+.imageSection {
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Info Section */
+.infoSection {
+  padding: 24px 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+/* Info Grid */
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+}
+
+.infoValue {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Episodes Section */
+.episodesSection {
+  margin-top: 8px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.episodesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.episodesList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.episodesList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.episodesList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.episodesList::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.episodeItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.episodeItem:hover {
+  background-color: #f0f0f0;
+}
+
+.episodeCode {
+  font-size: 13px;
+  font-weight: 600;
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.episodeName {
+  font-size: 14px;
+  color: #333;
+}
+
+.noEpisodes {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.errorIcon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.error h2 {
+  font-size: 24px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.error p {
+  color: #666;
+  margin: 0;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .detail {
+    grid-template-columns: 1fr;
+  }
+
+  .imageSection {
+    max-width: 100%;
+  }
+
+  .image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .infoSection {
+    padding: 24px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .detail {
+    border-radius: 12px;
+  }
+
+  .infoSection {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .episodesList {
+    max-height: 250px;
+  }
+
+  .episodeItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
