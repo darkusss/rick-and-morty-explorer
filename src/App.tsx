@@ -1,15 +1,27 @@
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Routes, Route } from 'react-router';
+import { lazy, Suspense } from 'react';
+import { Layout } from './components/layout';
+import { Loader } from './components/common';
+import Home from './pages/Home/Home';
+
+// Lazy load pages
+const CharacterDetail = lazy(
+  () => import('./pages/CharacterDetail/CharacterDetail')
+);
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<div>Home - Coming Soon</div>} />
-        <Route path="/character/:id" element={<div>Character Detail - Coming Soon</div>} />
-      </Routes>
+      <Layout>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/character/:id" element={<CharacterDetail />} />
+          </Routes>
+        </Suspense>
+      </Layout>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
