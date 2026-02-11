@@ -1,4 +1,8 @@
-import type { Character, ApiResponse, CharacterFilters } from '../types/character';
+import type {
+  Character,
+  ApiResponse,
+  CharacterFilters,
+} from '../types/character';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
@@ -66,7 +70,7 @@ export const fetchEpisodesByUrls = async (
 ): Promise<{ id: number; name: string; episode: string }[]> => {
   // Extract IDs from URLs and fetch in batch
   const ids = urls.map((url) => url.split('/').pop()).join(',');
-  
+
   const response = await fetch(`${BASE_URL}/episode/${ids}`);
 
   if (!response.ok) {
@@ -74,7 +78,7 @@ export const fetchEpisodesByUrls = async (
   }
 
   const data = await response.json();
-  
+
   // API returns single object if only one ID, array if multiple
   return Array.isArray(data) ? data : [data];
 };
