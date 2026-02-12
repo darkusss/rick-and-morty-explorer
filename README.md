@@ -8,6 +8,10 @@ A React single-page application that displays characters from the Rick and Morty
 ![TanStack Query](https://img.shields.io/badge/TanStack%20Query-5-red)
 ![Vitest](https://img.shields.io/badge/Vitest-3-green)
 
+## 🌐 Live Demo
+
+**[View Live Application](https://lustrous-horse-9c05c4.netlify.app/)**
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
