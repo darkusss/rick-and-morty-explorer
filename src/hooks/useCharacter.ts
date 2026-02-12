@@ -25,7 +25,7 @@ export function useCharacter(id: number): UseCharacterReturn {
     error: characterError,
   } = useQuery({
     queryKey: ['character', id],
-    queryFn: () => fetchCharacterById(id),
+    queryFn: ({ signal }) => fetchCharacterById(id, signal),
   });
 
   const {
@@ -34,9 +34,9 @@ export function useCharacter(id: number): UseCharacterReturn {
     error: episodesError,
   } = useQuery({
     queryKey: ['character', id, 'episodes'],
-    queryFn: () => {
+    queryFn: ({ signal }) => {
       if (!character?.episode) return [];
-      return fetchEpisodesByUrls(character.episode);
+      return fetchEpisodesByUrls(character.episode, signal);
     },
     enabled: !!character?.episode,
   });

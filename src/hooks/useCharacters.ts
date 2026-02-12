@@ -29,7 +29,8 @@ export function useCharacters(
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ['characters', filters],
-    queryFn: ({ pageParam }) => fetchCharacters({ pageParam, filters }),
+    queryFn: ({ pageParam, signal }) =>
+      fetchCharacters({ pageParam, filters, signal }),
     initialPageParam: 1,
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => {

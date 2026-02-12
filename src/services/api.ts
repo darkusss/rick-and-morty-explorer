@@ -12,9 +12,11 @@ const BASE_URL = 'https://rickandmortyapi.com/api';
 export async function fetchCharacters({
   pageParam = 1,
   filters = {},
+  signal,
 }: {
   pageParam?: number;
   filters?: CharacterFilters;
+  signal?: AbortSignal;
 }): Promise<ApiResponse<Character>> {
   const params = new URLSearchParams();
   params.append('page', pageParam.toString());
@@ -25,7 +27,7 @@ export async function fetchCharacters({
     }
   });
 
-  const response = await fetch(`${BASE_URL}/character?${params}`);
+  const response = await fetch(`${BASE_URL}/character?${params}`, { signal });
 
   if (response.status === 404) {
     return {
@@ -48,8 +50,11 @@ export async function fetchCharacters({
 /**
  * Fetch a single character by ID
  */
-export async function fetchCharacterById(id: number): Promise<Character> {
-  const response = await fetch(`${BASE_URL}/character/${id}`);
+export async function fetchCharacterById(
+  id: number,
+  signal?: AbortSignal
+): Promise<Character> {
+  const response = await fetch(`${BASE_URL}/character/${id}`, { signal });
 
   if (response.status === 404) {
     throw new Error('Character not found');
@@ -70,10 +75,11 @@ export async function fetchCharacterById(id: number): Promise<Character> {
  * Fetch multiple episodes by URLs
  */
 export async function fetchEpisodesByUrls(
-  urls: string[]
+  urls: string[],
+  signal?: AbortSignal
 ): Promise<{ id: number; name: string; episode: string }[]> {
   const ids = urls.map((url) => url.split('/').pop()).join(',');
-  const response = await fetch(`${BASE_URL}/episode/${ids}`);
+  const response = await fetch(`${BASE_URL}/episode/${ids}`, { signal });
 
   if (response.status === 429) {
     throw new Error('Too many requests. Please wait a moment and try again.');
