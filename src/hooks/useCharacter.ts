@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import type { Character } from '../types/character';
 import { fetchCharacterById, fetchEpisodesByUrls } from '../services/api';
 
@@ -19,43 +19,34 @@ interface UseCharacterReturn {
  * Hook to fetch a single character by ID with their episodes
  */
 export function useCharacter(id: number): UseCharacterReturn {
-  const [character, setCharacter] = useState<Character | null>(null);
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: character,
+    isLoading: loadingCharacter,
+    error: characterError,
+  } = useQuery({
+    queryKey: ['character', id],
+    queryFn: () => fetchCharacterById(id),
+  });
 
-  useEffect(() => {
-    const loadCharacter = async () => {
-      setLoading(true);
-      setError(null);
+  const {
+    data: episodes,
+    isLoading: loadingEpisodes,
+    error: episodesError,
+  } = useQuery({
+    queryKey: ['character', id, 'episodes'],
+    queryFn: () => {
+      if (!character?.episode) return [];
+      return fetchEpisodesByUrls(character.episode);
+    },
+    enabled: !!character?.episode,
+  });
 
-      try {
-        // Fetch character data
-        const characterData = await fetchCharacterById(id);
-        setCharacter(characterData);
-
-        // Fetch episodes data
-        if (characterData.episode.length > 0) {
-          const episodesData = await fetchEpisodesByUrls(characterData.episode);
-          setEpisodes(episodesData);
-        }
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : 'Failed to fetch character'
-        );
-        setCharacter(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCharacter();
-  }, [id]);
+  const error = characterError || episodesError;
 
   return {
-    character,
-    episodes,
-    loading,
-    error,
+    character: character || null,
+    episodes: episodes || [],
+    loading: loadingCharacter || loadingEpisodes,
+    error: error instanceof Error ? error.message : null,
   };
 }
