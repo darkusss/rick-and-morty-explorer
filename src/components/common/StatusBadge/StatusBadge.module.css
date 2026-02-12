@@ -16,28 +16,28 @@
 }
 
 .alive {
-  background-color: rgba(85, 204, 68, 0.15);
-  color: #2e7d32;
+  background-color: var(--color-alive-bg);
+  color: var(--color-alive-text);
 }
 
 .alive .dot {
-  background-color: #55cc44;
+  background-color: var(--color-alive);
 }
 
 .dead {
-  background-color: rgba(214, 61, 46, 0.15);
-  color: #c62828;
+  background-color: var(--color-dead-bg);
+  color: var(--color-dead-text);
 }
 
 .dead .dot {
-  background-color: #d63d2e;
+  background-color: var(--color-dead);
 }
 
 .unknown {
-  background-color: rgba(158, 158, 158, 0.15);
-  color: #616161;
+  background-color: var(--color-unknown-bg);
+  color: var(--color-unknown-text);
 }
 
 .unknown .dot {
-  background-color: #9e9e9e;
+  background-color: var(--color-unknown);
 }

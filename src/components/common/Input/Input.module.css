@@ -7,16 +7,16 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .input {
   padding: 10px 14px;
   font-size: 16px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--color-border-primary);
   border-radius: 8px;
-  background-color: #ffffff;
-  color: #333;
+  background-color: var(--color-white);
+  color: var(--color-text-primary);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -24,24 +24,24 @@
 
 .input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-focus);
 }
 
 .input::placeholder {
-  color: #999;
+  color: var(--color-text-tertiary);
 }
 
 .inputError {
-  border-color: #dc3545;
+  border-color: var(--color-error);
 }
 
 .inputError:focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-focus);
 }
 
 .error {
   font-size: 13px;
-  color: #dc3545;
+  color: var(--color-error);
 }

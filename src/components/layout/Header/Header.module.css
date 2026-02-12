@@ -1,6 +1,6 @@
 .header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border-primary);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -30,13 +30,13 @@
 .logoText {
   font-size: 20px;
   font-weight: 700;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .backLink {
   font-size: 14px;
   font-weight: 500;
-  color: #007bff;
+  color: var(--color-primary);
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -44,7 +44,7 @@
 }
 
 .backLink:hover {
-  background-color: rgba(0, 123, 255, 0.1);
+  background-color: var(--color-primary-hover);
 }
 
 @media (max-width: 576px) {

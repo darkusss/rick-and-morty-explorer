@@ -2,10 +2,10 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 32px;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Image Section */
@@ -37,7 +37,7 @@
 .name {
   font-size: 28px;
   font-weight: 700;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -58,13 +58,13 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #999;
+  color: var(--color-text-tertiary);
   letter-spacing: 0.5px;
 }
 
 .infoValue {
   font-size: 16px;
-  color: #333;
+  color: var(--color-text-primary);
   font-weight: 500;
 }
 
@@ -76,7 +76,7 @@
 .sectionTitle {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0 0 16px 0;
 }
 
@@ -94,17 +94,17 @@
 }
 
 .episodesList::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-scrollbar-track);
   border-radius: 3px;
 }
 
 .episodesList::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--color-scrollbar-thumb);
   border-radius: 3px;
 }
 
 .episodesList::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
+  background: var(--color-scrollbar-thumb-hover);
 }
 
 .episodeItem {
@@ -112,20 +112,20 @@
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-secondary);
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
 
 .episodeItem:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-bg-tertiary);
 }
 
 .episodeCode {
   font-size: 13px;
   font-weight: 600;
-  color: #007bff;
-  background-color: rgba(0, 123, 255, 0.1);
+  color: var(--color-primary);
+  background-color: var(--color-primary-hover);
   padding: 4px 8px;
   border-radius: 4px;
   white-space: nowrap;
@@ -133,11 +133,11 @@
 
 .episodeName {
   font-size: 14px;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .noEpisodes {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -155,12 +155,12 @@
 
 .error h2 {
   font-size: 24px;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0 0 8px 0;
 }
 
 .error p {
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 

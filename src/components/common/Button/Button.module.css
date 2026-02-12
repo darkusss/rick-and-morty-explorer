@@ -28,36 +28,36 @@
 
 /* Variants */
 .primary {
-  background-color: #007bff;
-  color: #ffffff;
-  border-color: #007bff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
 }
 
 .primary:hover:not(.disabled) {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
 }
 
 .secondary {
-  background-color: #6c757d;
-  color: #ffffff;
-  border-color: #6c757d;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
 }
 
 .secondary:hover:not(.disabled) {
-  background-color: #545b62;
-  border-color: #545b62;
+  background-color: var(--color-secondary-dark);
+  border-color: var(--color-secondary-dark);
 }
 
 .outline {
   background-color: transparent;
-  color: #007bff;
-  border-color: #007bff;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .outline:hover:not(.disabled) {
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 /* States */
