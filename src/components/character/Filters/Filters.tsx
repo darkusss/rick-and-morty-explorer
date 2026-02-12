@@ -1,14 +1,9 @@
+import { useFilterContext } from '../../../context/FilterContext';
 import { Input, Select, Button } from '../../common';
-import type { CharacterFilters, SortOrder } from '../../../types/character';
+import type { CharacterFilters } from '../../../types/character';
 import styles from './Filters.module.css';
 
 interface FiltersProps {
-  searchValue: string;
-  onSearchChange: (value: string) => void;
-  filters: CharacterFilters;
-  onFiltersChange: (filters: CharacterFilters) => void;
-  sortOrder: SortOrder | null;
-  onSortChange: (order: SortOrder | null) => void;
   totalCount: number;
   showingCount: number;
 }
@@ -37,24 +32,19 @@ const SPECIES_OPTIONS = [
   { value: 'cronenberg', label: 'Cronenberg' },
 ];
 
-export function Filters({
-  searchValue,
-  onSearchChange,
-  filters,
-  onFiltersChange,
-  sortOrder,
-  onSortChange,
-  totalCount,
-  showingCount,
-}: FiltersProps) {
-  const handleFilterChange = (key: keyof CharacterFilters, value: string) => {
-    onFiltersChange({ ...filters, [key]: value });
-  };
+export function Filters({ totalCount, showingCount }: FiltersProps) {
+  const {
+    searchValue,
+    setSearchValue,
+    filters,
+    setFilters,
+    sortOrder,
+    setSortOrder,
+    clearAll,
+  } = useFilterContext();
 
-  const handleClearFilters = () => {
-    onSearchChange('');
-    onFiltersChange({});
-    onSortChange(null);
+  const handleFilterChange = (key: keyof CharacterFilters, value: string) => {
+    setFilters({ ...filters, [key]: value });
   };
 
   const hasActiveFilters =
@@ -72,7 +62,7 @@ export function Filters({
           <Input
             placeholder="Search characters by name..."
             value={searchValue}
-            onChange={(e) => onSearchChange(e.target.value)}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
       </div>
@@ -105,14 +95,14 @@ export function Filters({
           <Button
             variant={sortOrder === 'asc' ? 'primary' : 'outline'}
             size="medium"
-            onClick={() => onSortChange(sortOrder === 'asc' ? null : 'asc')}
+            onClick={() => setSortOrder(sortOrder === 'asc' ? null : 'asc')}
           >
             A-Z
           </Button>
           <Button
             variant={sortOrder === 'desc' ? 'primary' : 'outline'}
             size="medium"
-            onClick={() => onSortChange(sortOrder === 'desc' ? null : 'desc')}
+            onClick={() => setSortOrder(sortOrder === 'desc' ? null : 'desc')}
           >
             Z-A
           </Button>
@@ -126,7 +116,7 @@ export function Filters({
         </span>
 
         {hasActiveFilters && (
-          <Button variant="secondary" size="small" onClick={handleClearFilters}>
+          <Button variant="secondary" size="small" onClick={clearAll}>
             Clear Filters
           </Button>
         )}

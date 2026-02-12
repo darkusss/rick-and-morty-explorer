@@ -1,36 +1,15 @@
-import { useState } from 'react';
 import { Container } from '../../components/layout';
 import { CharacterGrid, Filters } from '../../components/character';
 import { Button, Loader } from '../../components/common';
-import { useCharacters, useDebounce } from '../../hooks';
-import type { CharacterFilters } from '../../types/character';
+import { useCharacters } from '../../hooks';
+import { useFilterContext } from '../../context/FilterContext';
 import styles from './Home.module.css';
 
 export default function Home() {
-  // Search state
-  const [searchValue, setSearchValue] = useState('');
-  const debouncedSearch = useDebounce(searchValue, 500);
+  const { filters, sortOrder } = useFilterContext();
 
-  // Filter state
-  const [filters, setFilters] = useState<CharacterFilters>({});
-
-  // Combined filters with debounced search
-  const combinedFilters: CharacterFilters = {
-    ...filters,
-    name: debouncedSearch,
-  };
-
-  // Fetch characters
-  const {
-    characters,
-    loading,
-    error,
-    hasMore,
-    totalCount,
-    loadMore,
-    sortOrder,
-    setSortOrder,
-  } = useCharacters(combinedFilters);
+  const { characters, loading, error, hasMore, totalCount, loadMore } =
+    useCharacters(filters, sortOrder);
 
   return (
     <Container>
@@ -43,21 +22,12 @@ export default function Home() {
       </div>
 
       {/* Filters */}
-      <Filters
-        searchValue={searchValue}
-        onSearchChange={setSearchValue}
-        filters={filters}
-        onFiltersChange={setFilters}
-        sortOrder={sortOrder}
-        onSortChange={setSortOrder}
-        totalCount={totalCount}
-        showingCount={characters.length}
-      />
+      <Filters totalCount={totalCount} showingCount={characters.length} />
 
       {/* Error State */}
       {error && (
         <div className={styles.error}>
-          <span className={styles.errorIcon}>⚠️</span>
+          <span className={styles.errorIcon}></span>
           <p>{error}</p>
         </div>
       )}
