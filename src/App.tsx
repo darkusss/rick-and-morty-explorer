@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router';
 import { lazy, Suspense } from 'react';
 import { Layout } from './components/layout';
 import { Loader } from './components/common';
-import { FilterProvider } from './context/FilterContext';
+import { FilterProvider } from './context/FilterProvider';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 
@@ -13,14 +13,14 @@ const CharacterDetail = lazy(
 
 function RootLayout() {
   return (
-    <Layout>
-      <FilterProvider>
+    <FilterProvider>
+      <Layout>
         {/* Handles lazy route loading via Outlet */}
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-      </FilterProvider>
-    </Layout>
+      </Layout>
+    </FilterProvider>
   );
 }
 

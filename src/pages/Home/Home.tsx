@@ -2,7 +2,7 @@ import { Container } from '../../components/layout';
 import { CharacterGrid, Filters } from '../../components/character';
 import { Button, Loader } from '../../components/common';
 import { useCharacters } from '../../hooks';
-import { useFilterContext } from '../../context/FilterContext';
+import { useFilterContext } from '../../context';
 import styles from './Home.module.css';
 
 export default function Home() {
