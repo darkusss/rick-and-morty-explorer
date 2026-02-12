@@ -9,7 +9,11 @@ interface CharacterCardProps {
 
 export function CharacterCard({ character }: CharacterCardProps) {
   return (
-    <Link to={`/character/${character.id}`} className={styles.card}>
+    <Link
+      to={`/character/${character.id}`}
+      state={{ fromList: true }}
+      className={styles.card}
+    >
       <div className={styles.imageContainer}>
         <img
           src={character.image}
