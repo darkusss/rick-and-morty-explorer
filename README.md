@@ -58,7 +58,7 @@ A React single-page application that displays characters from the Rick and Morty
 
 ```bash
 # Clone the repository
-git clone https://github.com/darkusss/rick-and-morty-explorer.git
+git clone https://github.com/yourusername/rick-and-morty-explorer.git
 
 # Navigate to project directory
 cd rick-and-morty-explorer
