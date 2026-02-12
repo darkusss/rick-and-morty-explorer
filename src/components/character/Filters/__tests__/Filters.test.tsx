@@ -33,6 +33,7 @@ const createContextValue = (overrides?: {
     sortOrder: overrides?.sortOrder ?? null,
     setSortOrder: vi.fn(),
     setSearchParams: vi.fn(),
+    setFilters: vi.fn(),
   };
 };
 
@@ -44,7 +45,7 @@ describe('Filters', () => {
   it('renders counts', () => {
     mockUseFilterContext.mockReturnValue(createContextValue());
 
-    render(<Filters totalCount={100} showingCount={20} setFilters={vi.fn()} />);
+    render(<Filters totalCount={100} showingCount={20} />);
 
     expect(
       screen.getByText('Showing 20 of 100 characters')
@@ -55,7 +56,7 @@ describe('Filters', () => {
     const contextValue = createContextValue();
     mockUseFilterContext.mockReturnValue(contextValue);
 
-    render(<Filters totalCount={0} showingCount={0} setFilters={vi.fn()} />);
+    render(<Filters totalCount={0} showingCount={0} />);
 
     const searchInput = screen.getByPlaceholderText(
       'Search characters by name...'
@@ -68,33 +69,32 @@ describe('Filters', () => {
     expect(searchInput.value).toBe('rick');
   });
 
-  it('updates status, species, and gender filters', () => {
+  it('updates filter selections', () => {
     const contextValue = createContextValue();
-    const mockSetFilters = vi.fn();
     mockUseFilterContext.mockReturnValue(contextValue);
 
-    render(
-      <Filters totalCount={0} showingCount={0} setFilters={mockSetFilters} />
-    );
+    render(<Filters totalCount={0} showingCount={0} />);
 
     const [statusSelect, speciesSelect, genderSelect] =
       screen.getAllByRole('combobox');
 
     fireEvent.change(statusSelect, { target: { value: 'alive' } });
-    fireEvent.change(speciesSelect, { target: { value: 'human' } });
-    fireEvent.change(genderSelect, { target: { value: 'female' } });
 
-    expect(mockSetFilters).toHaveBeenCalledWith({
+    expect(contextValue.setFilters).toHaveBeenCalledWith({
       ...contextValue.filters,
       status: 'alive',
     });
 
-    expect(mockSetFilters).toHaveBeenCalledWith({
+    fireEvent.change(speciesSelect, { target: { value: 'human' } });
+
+    expect(contextValue.setFilters).toHaveBeenCalledWith({
       ...contextValue.filters,
       species: 'human',
     });
 
-    expect(mockSetFilters).toHaveBeenCalledWith({
+    fireEvent.change(genderSelect, { target: { value: 'female' } });
+
+    expect(contextValue.setFilters).toHaveBeenCalledWith({
       ...contextValue.filters,
       gender: 'female',
     });
@@ -104,12 +104,12 @@ describe('Filters', () => {
     const contextValue = createContextValue({ sortOrder: null });
     mockUseFilterContext.mockReturnValue(contextValue);
 
-    render(<Filters totalCount={0} showingCount={0} setFilters={vi.fn()} />);
+    render(<Filters totalCount={0} showingCount={0} />);
 
     fireEvent.click(screen.getByRole('button', { name: 'A-Z' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Z-A' }));
-
     expect(contextValue.setSortOrder).toHaveBeenCalledWith('asc');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Z-A' }));
     expect(contextValue.setSortOrder).toHaveBeenCalledWith('desc');
   });
 
@@ -117,20 +117,64 @@ describe('Filters', () => {
     const contextValue = createContextValue({
       searchValue: 'rick',
     });
-    const mockSetFilters = vi.fn();
     mockUseFilterContext.mockReturnValue(contextValue);
 
-    render(
-      <Filters totalCount={0} showingCount={0} setFilters={mockSetFilters} />
-    );
+    render(<Filters totalCount={0} showingCount={0} />);
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear Filters' }));
 
     expect(contextValue.updateSearchParam).toHaveBeenCalledWith('');
     expect(contextValue.setSortOrder).toHaveBeenCalledWith(null);
-    expect(mockSetFilters).toHaveBeenCalledWith(
+    expect(contextValue.setFilters).toHaveBeenCalledWith(
       {},
       expect.any(URLSearchParams)
     );
+  });
+
+  it('shows clear button only when filters are active', () => {
+    const contextValue = createContextValue();
+    mockUseFilterContext.mockReturnValue(contextValue);
+
+    render(<Filters totalCount={0} showingCount={0} />);
+
+    // Initially, no clear button should be visible
+    expect(
+      screen.queryByRole('button', { name: 'Clear Filters' })
+    ).not.toBeInTheDocument();
+
+    // Type in search input to activate filters
+    const searchInput = screen.getByPlaceholderText(
+      'Search characters by name...'
+    ) as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: 'rick' } });
+
+    // Now clear button should be visible
+    expect(
+      screen.getByRole('button', { name: 'Clear Filters' })
+    ).toBeInTheDocument();
+  });
+
+  it('shows clear button when status filter is selected', () => {
+    const contextValue = createContextValue({
+      filters: { status: 'alive' },
+    });
+    mockUseFilterContext.mockReturnValue(contextValue);
+
+    render(<Filters totalCount={0} showingCount={0} />);
+
+    expect(
+      screen.getByRole('button', { name: 'Clear Filters' })
+    ).toBeInTheDocument();
+  });
+
+  it('shows clear button when sort order is active', () => {
+    const contextValue = createContextValue({ sortOrder: 'asc' });
+    mockUseFilterContext.mockReturnValue(contextValue);
+
+    render(<Filters totalCount={0} showingCount={0} />);
+
+    expect(
+      screen.getByRole('button', { name: 'Clear Filters' })
+    ).toBeInTheDocument();
   });
 });

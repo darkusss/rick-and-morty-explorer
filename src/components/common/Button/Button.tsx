@@ -28,7 +28,7 @@ export function Button({
     .join(' ');
 
   return (
-    <button className={classNames} disabled={disabled} {...props}>
+    <button role="button" className={classNames} disabled={disabled} {...props}>
       {children}
     </button>
   );
