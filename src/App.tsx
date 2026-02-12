@@ -4,6 +4,7 @@ import { Layout } from './components/layout';
 import { Loader } from './components/common';
 import { FilterProvider } from './context/FilterContext';
 import Home from './pages/Home/Home';
+import NotFound from './pages/NotFound/NotFound';
 
 // Lazy load pages
 const CharacterDetail = lazy(
@@ -14,6 +15,7 @@ function RootLayout() {
   return (
     <Layout>
       <FilterProvider>
+        {/* Handles lazy route loading via Outlet */}
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/character/:id',
         element: <CharacterDetail />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
