@@ -53,7 +53,7 @@ export default function CharacterDetail() {
           <div className={styles.infoGrid}>
             <InfoItem label="Species" value={character.species} />
             <InfoItem label="Gender" value={character.gender} />
-            <InfoItem label="Type" value={character.type ?? 'Unknown'} />
+            <InfoItem label="Type" value={character.type || 'Unknown'} />
             <InfoItem label="Origin" value={character.origin.name} />
             <InfoItem label="Location" value={character.location.name} />
             <InfoItem
