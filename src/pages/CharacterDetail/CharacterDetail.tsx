@@ -8,6 +8,8 @@ export default function CharacterDetail() {
   const { id } = useParams<{ id: string }>();
   const { character, episodes, loading, error } = useCharacter(Number(id));
 
+  const errorNew = 'The character you are looking for does not exist.';
+
   if (loading) {
     return (
       <Container size="medium">
@@ -22,7 +24,7 @@ export default function CharacterDetail() {
         <div className={styles.error}>
           <span className={styles.errorIcon}>😵</span>
           <h2>Character Not Found</h2>
-          <p>{error || 'The character you are looking for does not exist.'}</p>
+          <p>{error || errorNew}</p>
         </div>
       </Container>
     );
@@ -84,7 +86,7 @@ export default function CharacterDetail() {
   );
 }
 
-// Helper component for info items
+// Helper component for info items!
 interface InfoItemProps {
   label: string;
   value: string;
