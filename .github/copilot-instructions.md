@@ -1,21 +1,9 @@
 When reviewing code, focus on:
 
-## Security Critical Issues
-
-- Check for hardcoded secrets, API keys, or credentials
-- Look for SQL injection and XSS vulnerabilities
-- Verify proper input validation and sanitization
-
-## Performance Red Flags
-
-- Spot inefficient loops and algorithmic issues
-- Check for memory leaks and resource cleanup
-- Review caching opportunities for expensive operations
-
 ## Code Quality Essentials
 
 - Functions should be focused and appropriately sized
-- DO NOT complain about naming conventions
+- DO NOT complain about naming conventions and descriptive variable names
 - Ensure proper error handling throughout
 
 ## Review Style
