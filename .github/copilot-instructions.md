@@ -15,7 +15,7 @@ When reviewing code, focus on:
 ## Code Quality Essentials
 
 - Functions should be focused and appropriately sized
-- Use clear, descriptive naming conventions
+- DO NOT complain about naming conventions
 - Ensure proper error handling throughout
 
 ## Review Style
