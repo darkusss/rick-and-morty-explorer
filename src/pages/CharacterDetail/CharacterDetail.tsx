@@ -62,7 +62,9 @@ export default function CharacterDetail() {
 
           {/* Episodes List */}
           <div className={styles.episodesSection}>
-            <h2 className={styles.sectionTitle}>Episode Appearances</h2>
+            <h2 className={styles.sectionTitle}>
+              Episode Appearances ({character.episode.length ?? 'None'})
+            </h2>
             {episodes.length > 0 ? (
               <div className={styles.episodesList}>
                 {episodes.map((episode) => (
@@ -71,6 +73,9 @@ export default function CharacterDetail() {
                       {episode.episode}
                     </span>
                     <span className={styles.episodeName}>{episode.name}</span>
+                    <span className={styles.episodeAirDate}>
+                      {episode.air_date}
+                    </span>
                   </div>
                 ))}
               </div>
