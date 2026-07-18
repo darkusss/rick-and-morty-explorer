@@ -14,7 +14,7 @@ When reviewing code, focus on:
   /_ avoid _/
   .card {
   padding-top: 1rem;
-  font-size: 20vw;
+  font-size: 20px;
   text-align: left;
   }
 
