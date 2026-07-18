@@ -136,6 +136,13 @@
   color: var(--color-text-primary);
 }
 
+.episodeAirDate {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+}
+
 .noEpisodes {
   color: var(--color-text-secondary);
   font-size: 14px;
