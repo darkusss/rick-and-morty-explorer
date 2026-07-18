@@ -6,6 +6,25 @@ When reviewing code, focus on:
 - DO NOT complain about naming conventions and descriptive variable names
 - Ensure proper error handling throughout
 
+## Style and Layout
+
+- Use flow-relative properties (e.g. padding-block-start, inset-inline, inline-size), units (e.g. cqi, cqb, vi), and keywords (e.g. text-align: start) for layout.
+  Constraint: Avoid physical equivalents (e.g. padding-top, width, cqw, vw, text-align: left). References: Logical properties and values on MDN.
+  Example:
+  /_ avoid _/
+  .card {
+  padding-top: 1rem;
+  font-size: 20vw;
+  text-align: left;
+  }
+
+/_ prefer _/
+.card {
+padding-block-start: 1rem;
+font-size: 20vi;
+text-align: start;
+}
+
 ## Review Style
 
 - Be specific and actionable in feedback
