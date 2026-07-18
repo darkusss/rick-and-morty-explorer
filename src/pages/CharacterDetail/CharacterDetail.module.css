@@ -137,8 +137,8 @@
 }
 
 .episodeAirDate {
-  margin-left: auto;
-  font-size: 12px;
+  margin-inline-start: auto;
+  font-size: 12vi;
   color: var(--color-text-tertiary);
   white-space: nowrap;
 }
